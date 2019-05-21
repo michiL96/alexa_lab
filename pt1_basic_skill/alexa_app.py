@@ -29,6 +29,13 @@ def fallback_intent():
     return question(fall_back_message)
 
 
+@ask.intent("NoIntent)
+def fallback_intent():
+    fall_back_message = "Ok"
+
+    return question(fall_back_message)
+
+
 @ask.intent("YesIntent")
 def next_round():
     numbers = [randint(0, 9) for _ in range(3)]

@@ -33,6 +33,7 @@ def update_dialog_history(session, request, dialog_history_attribute_name = 'dia
 
 
 def update_dialog_state(session, slots, reset=False, dialog_state_attribute_name = 'dialog_frame'):
+	'''
     dialog_state = {}
 
     if not reset:
@@ -41,6 +42,13 @@ def update_dialog_state(session, slots, reset=False, dialog_state_attribute_name
 		for slot_name, slot_value in slots.items():
 		    if slot_value is not None:
 		        dialog_state[slot_name] = slot_value
+	'''
+
+	dialog_state = session.attributes.get(dialog_state_attribute_name, {})
+
+	for slot_name, slot_value in slots.items():
+	    if slot_value is not None:
+	        dialog_state[slot_name] = slot_value
 
 	session.attributes[dialog_state_attribute_name] = dialog_state
 

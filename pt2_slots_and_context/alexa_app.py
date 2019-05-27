@@ -171,9 +171,11 @@ def received_affirm():
 
 @ask.intent("deny")
 def received_deny():
+	'''
     dialog_history = update_dialog_history(session, request)
 
     dialog_state = update_dialog_state(session, {"new_booking": True})
+	'''
 
     msg = render_template('utter_ask_booking')
 

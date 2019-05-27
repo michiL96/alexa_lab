@@ -139,9 +139,18 @@ def received_greet():
 @ask.intent("affirm")
 def received_affirm():
 
-    msg = render_template('utter_booked')
+    dialog_history = update_dialog_history(session, request)
 
-    response = statement(msg)
+    dialog_state = update_dialog_state(session,{})
+
+    if dialog_state.get('new_booking') is True:
+        msg = render_template('welcome')
+        response = question(msg)
+    else:
+
+        msg = render_template('utter_booked')
+
+        response = statement(msg)
 
     return response
 
@@ -149,9 +158,16 @@ def received_affirm():
 @ask.intent("deny")
 def received_deny():
 
-    msg = render_template('utter_goodbye')
+    update_dialog_history(session, request)
 
-    return statement(msg)
+    dialog_history = update_dialog_history(session, request)
+
+    dialog_state = update_dialog_state(session, {"new_booking": True})
+
+    msg = render_template('utter_ask_booking')
+
+    return question(msg)
+
 
 
 if __name__ == '__main__':

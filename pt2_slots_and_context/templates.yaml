@@ -15,3 +15,5 @@ utter_ask_book: Do you want me to book for {{people}} {{cuisine}} in the {{locat
 utter_booked: Ok. You are all set. Booking was successful.
 
 utter_goodbye: Ok. Goodbye
+
+utter_ask_booking: Do you want to try a new booking?

@@ -32,14 +32,17 @@ def update_dialog_history(session, request, dialog_history_attribute_name = 'dia
     return dialog_history
 
 
-def update_dialog_state(session, slots, dialog_state_attribute_name = 'dialog_frame'):
-    dialog_state = session.attributes.get(dialog_state_attribute_name, {})
+def update_dialog_state(session, slots, reset=False, dialog_state_attribute_name = 'dialog_frame'):
+    dialog_state = {}
 
-    for slot_name, slot_value in slots.items():
-        if slot_value is not None:
-            dialog_state[slot_name] = slot_value
+    if not reset:
+		dialog_state = session.attributes.get(dialog_state_attribute_name, {})
 
-    session.attributes[dialog_state_attribute_name] = dialog_state
+		for slot_name, slot_value in slots.items():
+		    if slot_value is not None:
+		        dialog_state[slot_name] = slot_value
+
+	session.attributes[dialog_state_attribute_name] = dialog_state
 
     return dialog_state
 
@@ -144,6 +147,7 @@ def received_affirm():
     dialog_state = update_dialog_state(session,{})
 
     if dialog_state.get('new_booking') is True:
+		dialog_state = update_dialog_state(session,{}, reset=True)
         msg = render_template('welcome')
         response = question(msg)
     else:

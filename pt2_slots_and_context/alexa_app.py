@@ -142,11 +142,9 @@ def received_greet():
 @ask.intent("affirm")
 def received_affirm():
 
-    dialog_history = update_dialog_history(session, request)
-
     dialog_state = update_dialog_state(session,{})
 
-    if dialog_state.get('new_booking') is True:
+    if dialog_state.get('new_booking') is not None:
 		dialog_state = update_dialog_state(session,{}, reset=True)
         msg = render_template('welcome')
         response = question(msg)
@@ -161,9 +159,6 @@ def received_affirm():
 
 @ask.intent("deny")
 def received_deny():
-
-    update_dialog_history(session, request)
-
     dialog_history = update_dialog_history(session, request)
 
     dialog_state = update_dialog_state(session, {"new_booking": True})

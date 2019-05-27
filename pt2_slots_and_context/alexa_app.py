@@ -166,7 +166,7 @@ def received_affirm():
 	msg = render_template('utter_booked')
 	response = statement(msg)
 
-    return response
+	return response
 
 
 @ask.intent("deny")
@@ -177,9 +177,9 @@ def received_deny():
     dialog_state = update_dialog_state(session, {"new_booking": True})
 	'''
 
-    msg = render_template('utter_ask_booking')
+	msg = render_template('utter_ask_booking')
 
-    return question(msg)
+	return question(msg)
 
 
 

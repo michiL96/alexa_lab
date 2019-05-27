@@ -141,7 +141,7 @@ def received_greet():
 
 @ask.intent("affirm")
 def received_affirm():
-
+	'''
     dialog_state = update_dialog_state(session,{})
 
     if dialog_state.get('new_booking') is not None:
@@ -153,6 +153,10 @@ def received_affirm():
         msg = render_template('utter_booked')
 
         response = statement(msg)
+	'''
+
+	msg = render_template('utter_booked')
+	response = statement(msg)
 
     return response
 

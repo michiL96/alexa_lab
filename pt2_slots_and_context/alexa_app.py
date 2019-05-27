@@ -33,22 +33,13 @@ def update_dialog_history(session, request, dialog_history_attribute_name = 'dia
 
 
 def update_dialog_state(session, slots, reset=False, dialog_state_attribute_name = 'dialog_frame'):
-	'''
-    dialog_state = {}
+	dialog_state = {}
 
-    if not reset:
+	if not reset:
 		dialog_state = session.attributes.get(dialog_state_attribute_name, {})
-
 		for slot_name, slot_value in slots.items():
-		    if slot_value is not None:
-		        dialog_state[slot_name] = slot_value
-	'''
-
-	dialog_state = session.attributes.get(dialog_state_attribute_name, {})
-
-	for slot_name, slot_value in slots.items():
-	    if slot_value is not None:
-	        dialog_state[slot_name] = slot_value
+			if slot_value is not None:
+				dialog_state[slot_name] = slot_value
 
 	session.attributes[dialog_state_attribute_name] = dialog_state
 
@@ -149,33 +140,24 @@ def received_greet():
 
 @ask.intent("affirm")
 def received_affirm():
-	'''
-    dialog_state = update_dialog_state(session,{})
+	dialog_state = update_dialog_state(session,{})
 
-    if dialog_state.get('new_booking') is not None:
+	if dialog_state.get('new_booking') is not None:
 		dialog_state = update_dialog_state(session,{}, reset=True)
-        msg = render_template('welcome')
-        response = question(msg)
-    else:
-
-        msg = render_template('utter_booked')
-
-        response = statement(msg)
-	'''
-
-	msg = render_template('utter_booked')
-	response = statement(msg)
+		msg = render_template('welcome')
+		response = question(msg)
+	else:
+		msg = render_template('utter_booked')
+		response = statement(msg)
 
 	return response
 
 
 @ask.intent("deny")
 def received_deny():
-	'''
-    dialog_history = update_dialog_history(session, request)
+	dialog_history = update_dialog_history(session, request)
 
-    dialog_state = update_dialog_state(session, {"new_booking": True})
-	'''
+	dialog_state = update_dialog_state(session, {"new_booking": True})
 
 	msg = render_template('utter_ask_booking')
 

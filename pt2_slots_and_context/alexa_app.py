@@ -52,7 +52,7 @@ def update_dialog_state(session, slots, reset=False, dialog_state_attribute_name
 
 	session.attributes[dialog_state_attribute_name] = dialog_state
 
-    return dialog_state
+	return dialog_state
 
 @ask.launch
 def new_booking():
